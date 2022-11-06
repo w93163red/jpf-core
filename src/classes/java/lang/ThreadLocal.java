@@ -93,7 +93,10 @@ public class ThreadLocal<T> {
     }
   }
 
-  
+  public static <S> ThreadLocal<S> withInitial(Supplier<? extends S> supplier) {
+    return new SuppliedThreadLocal<>(supplier);
+  }
+
   // Java 8 provides this as an internal type to be used from lib classes
   // ?? why is this not done with overridden initialValue() within the concrete ThreadLocal class
   static final class SuppliedThreadLocal<E> extends ThreadLocal<E> {
